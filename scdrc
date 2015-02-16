@@ -1,0 +1,14 @@
+### This file sets up tab completion. You do not need to do this to use scd directory pattern mattching fuctionality.
+# This feature is EXPERIMENTAL
+
+##Setup a directory root you'd like to search
+
+export logdir=~/Documents/logs
+
+##bash completion for above directory
+
+function lcd(){ scd $logdir $@; }
+_lcd(){ gcomp $logdir; }
+complete -F _lcd lcd
+
+# Now typing `lcd <tab>` will give you a list of directories in that dir. You can even do `lcd test/old_tests/ <tab> ` to see dirs in $logdir/test/old_tests if you want.
