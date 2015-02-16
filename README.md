@@ -29,6 +29,7 @@ To change to the log directory, and the subdirectory in its tree that contains t
 I use it like this. In '.bashrc' I put:
 
 > export $paperdir=~/Dropbox/docs/papers
+>
 > function pcd(){ pcd $paperdir $@; }
 
 My and my labmates papers are organized with the following naming convention: `<conf><year><subject>/<submission number>`. But there's often a lot of them.
