@@ -3,6 +3,8 @@ Bash scripts to support tab complete / subdirectory search when changing direrec
 
 ## Setup
 
+Note, adjust the source statements to match where you checked out the code. 
+
 1. add `source ~/.scd_setup` to your ~/.bashrc to add the scd command with full subdirectory pattern serach
 2. add `source ~/.scdrc` to your ~/.bashrc to enable tab completion. (currently EXPERIMENTAL). have a look in .scdrc to see how to use it.
 
