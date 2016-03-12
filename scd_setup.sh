@@ -5,18 +5,12 @@ scd(){
 		echo "INTERNAL ERROR"
 			return;
 	fi;
-	if [ -z $1 ];then 
-		cd $1;
-		return;
-	fi;
 	if [ -d $1/$2 ];then
-		cd $1/$2
-		return;
+		if [ "$#" -eq 2 ];then
+			cd $1/$2
+			return;
+		fi
 	fi
-	if [ -d $2 ];then 
-		cd $2;
-		return;
-	fi;
 	ostring="Searching: $1 for ${@:2}"
 	lostring=${#ostring}
 	echo "$ostring"
