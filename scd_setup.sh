@@ -23,7 +23,6 @@ scd(){
 	tput cuu1
 	i=0;
 	for pdir in `find $1 -maxdepth 10 `; do
-		#echo "$pdir"
 		#printf "\r%d" $i
 		#i=$A(expr $i + 1)
 		fnd="yes"
