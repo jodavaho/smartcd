@@ -5,11 +5,10 @@ scd(){
 		echo "INTERNAL ERROR"
 			return;
 	fi;
-	if [ -d $1/$2 ];then
-		if [ "$#" -eq 2 ];then
-			cd $1/$2
-			return;
-		fi
+	if [[ $2 = /* ]]; then
+		#absolute path
+		cd $2
+		return;
 	fi
 	ostring="Searching: $1 for ${@:2}"
 	lostring=${#ostring}
