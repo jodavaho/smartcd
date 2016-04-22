@@ -1,10 +1,6 @@
 
 
 scd(){
-	if [ -z $0 ];then
-		echo "INTERNAL ERROR"
-			return;
-	fi;
 	if [[ $2 = /* ]]; then
 		#absolute path
 		cd $2
@@ -94,7 +90,7 @@ gcomp()
 	
 	#wait, you want us to look for a keyword? ok, I'll try. First, how many matches are there?
 	local numfound=$(find $1 -maxdepth 10 -type d | grep -c $cur);
-	if [ $numfound > 0 ];then
+	if (( $numfound > 0 ));then
 		#lets just return the shortest one and start from there
 		COMPREPLY=($(compgen -W "`find $1 -maxdepth 5 -type d | grep $cur -m 1 | sed -e 's/ //g'`/"))
 		return
