@@ -11,7 +11,7 @@ scd(){
 	echo "$ostring"
 	tput cuu1
 	i=0;
-	for pdir in `find $1 -maxdepth 10 `; do
+	for pdir in `find -L $1 -maxdepth 10 `; do
 		#printf "\r%d" $i
 		#i=$A(expr $i + 1)
 		fnd="yes"
@@ -89,10 +89,10 @@ gcomp()
 	fi
 	
 	#wait, you want us to look for a keyword? ok, I'll try. First, how many matches are there?
-	local numfound=$(find $1 -maxdepth 10 -type d | grep -c $cur);
+	local numfound=$(find -L $1 -maxdepth 10 -type d | grep -c $cur);
 	if (( $numfound > 0 ));then
 		#lets just return the shortest one and start from there
-		COMPREPLY=($(compgen -W "`find $1 -maxdepth 5 -type d | grep $cur -m 1 | sed -e 's/ //g'`/"))
+		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 5 -type d | grep $cur -m 1 | sed -e 's/ //g'`/"))
 		return
 	fi
 	echo ""
