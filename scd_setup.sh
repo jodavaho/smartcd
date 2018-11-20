@@ -10,15 +10,14 @@ scd(){
 	lostring=${#ostring}
 	echo "$ostring"
 	tput cuu1
-	i=0;
-	for pdir in `find -L $1 -maxdepth 10 `; do
-		#printf "\r%d" $i
-		#i=$A(expr $i + 1)
+	#for pdir in `find $1 -maxdepth 3 -type d -path "*/.git" -prune -o -printf "%d\t%P\n" | sort -r -nk1 | cut -f2- `; do
+	for pdir in `find $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- `; do
 		fnd="yes"
 		shopt -s nocasematch
 		for tomatch in ${@:2}
 		do
-			if [[ ! $pdir =~ .*$tomatch.* ||  ! -d "$pdir" ]]
+      #printf "%s vs %s\n" $pdir $tomatch
+			if [[ "$pdir" != *$tomatch* ]]
 			then
 				fnd="no"
 				break
@@ -29,9 +28,9 @@ scd(){
 		shopt -u nocasematch
 		if [[ $fnd == "yes" ]]
 		then
-			cd $pdir
+			cd "$1/$pdir"
 			printf "\r"
-			printf "Found!"
+			printf "Found: %s" $pdir
 			for i in $(seq 1 $lostring)
 			do
 				printf " "
@@ -92,7 +91,7 @@ gcomp()
 	local numfound=$(find -L $1 -maxdepth 10 -type d | grep -c $cur);
 	if (( $numfound > 0 ));then
 		#lets just return the shortest one and start from there
-		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 5 -type d | grep $cur -m 1 | sed -e 's/ //g'`/"))
+		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur -m 1 | sed -e 's/ //g'`/"))
 		return
 	fi
 	echo ""
