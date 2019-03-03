@@ -1,6 +1,10 @@
 
 
 scd(){
+  if [[ $# == 1 ]]; then
+    cd $1 
+    return;
+  fi
 	if [[ $2 = /* ]]; then
 		#absolute path
 		cd $2
