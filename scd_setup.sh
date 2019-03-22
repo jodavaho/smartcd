@@ -5,10 +5,10 @@ scd(){
     cd $1 
     return;
   fi
-  echo "$1/$2"
 
-  if [ -d "$1/$2" ]; then
-    echo "Found"
+  if [ $# == 2 ] && [ -d "$1/$2" ] ; 
+  then
+    echo "$1/$2"
     cd "$1/$2"
     return;
   fi
@@ -102,11 +102,11 @@ gcomp()
 		#COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur -m 1 | sed -e 's/ //g'`/"))
 		return
 	fi
-	echo ""
-	echo "nf:$numfound"
-	echo "ldir:$ldir"
-	echo "pdir:$pdir"
-	echo "cur:$cur"
+	#echo ""
+	#echo "nf:$numfound"
+	#echo "ldir:$ldir"
+	#echo "pdir:$pdir"
+	#echo "cur:$cur"
 	#tt=`find $pdir/ -maxdepth 10 -type d | grep $cur`
 	COMPREPLY=( $(compgen -W "$tt"))
 }
