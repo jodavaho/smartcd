@@ -5,8 +5,13 @@ scd(){
     cd $1 
     return;
   fi
-	if [[ $2 = /* ]]; then
+	if [[ "$2" == "/*" ]]; then
 		#absolute path
+		cd $2
+		return;
+	fi
+	if [[ "$2" == ".?/*" ]]; then
+		#relative path
 		cd $2
 		return;
 	fi
@@ -95,7 +100,8 @@ gcomp()
 	local numfound=$(find -L $1 -maxdepth 10 -type d | grep -c $cur);
 	if (( $numfound > 0 ));then
 		#lets just return the shortest one and start from there
-		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur -m 1 | sed -e 's/ //g'`/"))
+		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur | sed -e 's/ //g'`/"))
+		#COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur -m 1 | sed -e 's/ //g'`/"))
 		return
 	fi
 	echo ""
