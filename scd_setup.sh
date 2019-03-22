@@ -5,16 +5,14 @@ scd(){
     cd $1 
     return;
   fi
-	if [[ "$2" == "/*" ]]; then
-		#absolute path
-		cd $2
-		return;
-	fi
-	if [[ "$2" == ".?/*" ]]; then
-		#relative path
-		cd $2
-		return;
-	fi
+  echo "$1/$2"
+
+  if [ -d "$1/$2" ]; then
+    echo "Found"
+    cd "$1/$2"
+    return;
+  fi
+
 	ostring="Searching: $1 for ${@:2}"
 	lostring=${#ostring}
 	echo "$ostring"
