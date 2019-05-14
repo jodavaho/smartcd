@@ -18,7 +18,7 @@ scd(){
 	echo "$ostring"
 	tput cuu1
 	#for pdir in `find $1 -maxdepth 3 -type d -path "*/.git" -prune -o -printf "%d\t%P\n" | sort -r -nk1 | cut -f2- `; do
-	for pdir in `find $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- `; do
+	for pdir in `find $1 -maxdepth 4 -type d -printf "%d\t%P\n" | sort | cut -f2- `; do
 		fnd="yes"
 		shopt -s nocasematch
 		for tomatch in ${@:2}
@@ -98,8 +98,8 @@ gcomp()
 	local numfound=$(find -L $1 -maxdepth 10 -type d | grep -c $cur);
 	if (( $numfound > 0 ));then
 		#lets just return the shortest one and start from there
-		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur | sed -e 's/ //g'`/"))
-		#COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 3 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur -m 1 | sed -e 's/ //g'`/"))
+		COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 4 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur | sed -e 's/ //g'`/"))
+		#COMPREPLY=($(compgen -W "`find -L $1 -maxdepth 4 -type d -printf "%d\t%P\n" | sort | cut -f2- | grep $cur -m 1 | sed -e 's/ //g'`/"))
 		return
 	fi
 	#echo ""
