@@ -17,8 +17,8 @@ scd(){
 	lostring=${#ostring}
 	echo "$ostring"
 	tput cuu1
-	#for pdir in `find $1 -maxdepth 3 -type d -path "*/.git" -prune -o -printf "%d\t%P\n" | sort -r -nk1 | cut -f2- `; do
-	for pdir in `find $1 -maxdepth 4 -type d -printf "%d\t%P\n" | sort | cut -f2- `; do
+	#for pdir in `find -L $1 -maxdepth 3 -type d -path "*/.git" -prune -o -printf "%d\t%P\n" | sort -r -nk1 | cut -f2- `; do
+	for pdir in `find -L $1 -maxdepth 4 -type d -printf "%d\t%P\n" | sort | cut -f2- `; do
 		fnd="yes"
 		shopt -s nocasematch
 		for tomatch in ${@:2}
@@ -107,7 +107,7 @@ gcomp()
 	#echo "ldir:$ldir"
 	#echo "pdir:$pdir"
 	#echo "cur:$cur"
-	#tt=`find $pdir/ -maxdepth 10 -type d | grep $cur`
+	#tt=`find -L $pdir/ -maxdepth 10 -type d | grep $cur`
 	COMPREPLY=( $(compgen -W "$tt"))
 }
 
